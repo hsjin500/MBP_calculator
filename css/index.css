@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+input {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#target_label {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#target_label input{
+    width: 35%;
+}
+
+button {
+    color: white;
+    background-color: #6c63ff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4b49ac;
+}
+
+#history {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #eee;
+    height: 100%;
+    overflow: auto;
+}
+
+#history table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+#history th, #history td {
+    border: 1px solid #aaa;
+    padding: 5px;
+}
+
+#history th {
+    background-color: #ddd;
+}
+
+#history td {
+    background-color: #fff;
+}
+
+#history .in-target {
+    background-color: #90ee90;
+}
+
+#history .out-target {
+    background-color: #f08080;
+}
+
+.latest-result {
+    border: 3px solid #333;
+}
