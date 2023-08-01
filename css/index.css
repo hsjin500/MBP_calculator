@@ -3,7 +3,7 @@ body {
     padding: 10px;
     background-color: #f9f9f9;
     text-align: center;
-    background-image: url(/img/오리.png);
+    background-image: url(../img/오리.png);
     background-size: cover;
 }
 
