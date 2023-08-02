@@ -24,6 +24,7 @@ button {
 }
 
 input {
+    flex: 2; /* 입력 필드를 라벨 내에서 더 크게 보이게 합니다 */
     width: 50%;
     padding: 10px;
     margin: 10px 0;
@@ -36,6 +37,10 @@ label {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
+}
+
+label div {
+    padding: 10px;
 }
 
 #target_label {
@@ -59,16 +64,16 @@ button:hover {
 }
 
 #history {
+    max-height: 400px;  /* 원하는 높이로 조정해주세요. */
+    overflow-y: auto;   /* 수직 방향 스크롤을 가능하게 합니다. */
     margin-top: 20px;
-    padding: 10px;
-    background-color: #eee;
+    /* padding: 10px; */
     height: 100%;
-    overflow: auto;
 }
+
 
 #history table {
     width: 100%;
-    text-align: left;
     border-collapse: collapse;
 }
 
