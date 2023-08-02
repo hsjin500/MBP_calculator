@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-    color: #333;
+    color: #ffffff;
 }
 
 button {
@@ -24,11 +24,11 @@ button {
 }
 
 input {
-    flex: 2; /* 입력 필드를 라벨 내에서 더 크게 보이게 합니다 */
     width: 50%;
     padding: 10px;
     margin: 10px 0;
     box-sizing: border-box;
+    text-align: center;
 }
 
 label {
@@ -37,19 +37,17 @@ label {
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
+    color: #fff;
 }
 
 label div {
+    width: 50%;
     padding: 10px;
 }
 
 #target_label {
     padding-right: 0;
     padding-left: 0;
-}
-
-#target_label input{
-    width: 35%;
 }
 
 button {
