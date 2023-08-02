@@ -138,7 +138,7 @@ function calculateFluid() {
     newRecord.appendChild(gttPerMinCell);
 
     var timePerDropCell = document.createElement('td');
-    timePerDropCell.textContent = timePerDrop.toFixed(2) + " drops/sec";
+    timePerDropCell.textContent = timePerDrop.toFixed(2) + " 초/방울";
     newRecord.appendChild(timePerDropCell);
 
     historyBodyFluid.appendChild(newRecord);
