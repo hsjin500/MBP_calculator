@@ -113,8 +113,8 @@ function calculateFluid() {
 
     // 계산
     var ccPerHour = volume / duration;  // 시간당 cc 계산
-    var gttPerMin = (volume / duration) / 60;  // 분당 물방울 수 계산
-    var dropsPerSec = gttPerMin / 60;  // 초당 물방울 수 계산
+    var gttPerMin = ccPerHour / 3;  // 분당 물방울 수 계산
+    var timePerDrop = 60 / gttPerMin;  // 한방울 떨어지는데 걸리는 시간(초) 계산
 
     // 결과 저장 및 표시
     var historyBodyFluid = document.getElementById('historyBody2');
@@ -137,15 +137,15 @@ function calculateFluid() {
     gttPerMinCell.textContent = gttPerMin.toFixed(2) + " gtt/min";
     newRecord.appendChild(gttPerMinCell);
 
-    var dropsPerSecCell = document.createElement('td');
-    dropsPerSecCell.textContent = dropsPerSec.toFixed(2) + " drops/sec";
-    newRecord.appendChild(dropsPerSecCell);
+    var timePerDropCell = document.createElement('td');
+    timePerDropCell.textContent = timePerDrop.toFixed(2) + " drops/sec";
+    newRecord.appendChild(timePerDropCell);
 
     historyBodyFluid.appendChild(newRecord);
 
     // 기록을 localStorage에 저장
     var historyDataFluid = JSON.parse(localStorage.getItem('historyDataFluid')) || [];
-    historyDataFluid.push({ time: timeString, ccPerHour: ccPerHour, gttPerMin: gttPerMin, dropsPerSec: dropsPerSec });
+    historyDataFluid.push({ time: timeString, ccPerHour: ccPerHour, gttPerMin: gttPerMin, timePerDrop: timePerDrop });
     localStorage.setItem('historyDataFluid', JSON.stringify(historyDataFluid));
 }
 
@@ -210,9 +210,9 @@ window.onload = function () {
         gttPerMinCell.textContent = historyDataFluid[i].gttPerMin.toFixed(2) + " gtt/min";
         newRecordFluid.appendChild(gttPerMinCell);
 
-        var dropsPerSecCell = document.createElement('td');
-        dropsPerSecCell.textContent = historyDataFluid[i].dropsPerSec.toFixed(2) + " drops/sec";
-        newRecordFluid.appendChild(dropsPerSecCell);
+        var timePerDropCell = document.createElement('td');
+        timePerDropCell.textContent = historyDataFluid[i].timePerDrop.toFixed(2) + " drops/sec";
+        newRecordFluid.appendChild(timePerDropCell);
 
         historyBodyFluid.appendChild(newRecordFluid);
     }
