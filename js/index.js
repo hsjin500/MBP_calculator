@@ -122,11 +122,11 @@ function calculateFluid() {
 
     // 현재 시간 표시
     var currentTime = new Date();
-    var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") \n" 
-                   + String(currentTime.getHours()).padStart(2, '0') + "시:" + String(currentTime.getMinutes()).padStart(2, '0') + "분";
+    var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") <br>" 
+                + String(currentTime.getHours()).padStart(2, '0') + "시:" + String(currentTime.getMinutes()).padStart(2, '0') + "분";
 
     var timeCell = document.createElement('td');
-    timeCell.textContent = timeString;
+    timeCell.innerHTML = timeString; // textContent 대신 innerHTML 사용
     newRecord.appendChild(timeCell);
 
     var ccPerHourCell = document.createElement('td');
