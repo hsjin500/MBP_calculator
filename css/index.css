@@ -24,7 +24,7 @@ button {
 }
 
 input {
-    width: 50%;
+    width: 25vw;
     padding: 10px;
     margin: 10px 0;
     box-sizing: border-box;
@@ -35,13 +35,10 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
     color: #fff;
 }
 
 label div {
-    width: 50%;
     padding: 10px;
 }
 
@@ -61,41 +58,97 @@ button:hover {
     background-color: #335a76;
 }
 
-#history {
-    max-height: 40vh;  /* 원하는 높이로 조정해주세요. */
-    overflow-y: auto;   /* 수직 방향 스크롤을 가능하게 합니다. */
+/* 기록 표 스타일 */
+#history, #history2 {
+    max-height: 40vh; /* 원하는 높이로 조정해주세요. */
+    overflow-y: auto; /* 수직 방향 스크롤을 가능하게 합니다. */
     margin-top: 20px;
-    /* padding: 10px; */
     height: 100%;
 }
 
-
-#history table {
+/* 표 내부 스타일 */
+#history table, #history2 table {
     width: 100%;
     border-collapse: collapse;
 }
 
-#history th, #history td {
+/* 표 헤더와 셀 스타일 */
+#history th, #history td, #history2 th, #history2 td {
     border: 1px solid #aaa;
     padding: 5px;
 }
 
-#history th {
+/* 표 헤더 스타일 */
+#history th, #history2 th {
     background-color: #ddd;
 }
 
-#history td {
+/* 표 셀 스타일 */
+#history td, #history2 td {
     background-color: #fff;
 }
 
-#history .in-target {
+/* 표 셀 특별 스타일 */
+#history .in-target, #history2 .in-target {
     background-color: #90ee90;
 }
 
-#history .out-target {
+#history .out-target, #history2 .out-target {
     background-color: #f08080;
 }
 
 .latest-result {
     border: 3px solid #333;
+}
+
+
+/* 탭 스타일 */
+.tab {
+    overflow: hidden;
+    background-color: #11334c;
+    display: flex;
+    /* flex 속성 추가 */
+    justify-content: space-around;
+    /* 좌우 간격 조절 */
+}
+
+/* 탭 버튼 스타일 */
+.tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+    flex: 1;
+    /* 각 버튼의 너비를 동일하게 설정 */
+    text-align: center;
+    /* 버튼 내의 텍스트 중앙 정렬 */
+    margin: 0;
+    border: 1px solid #595b63;
+}
+
+.tab button {
+    border-right: 1px solid #595b63;
+}
+
+.tab button:not(:first-child) {
+    border-left: 1px solid #595b63;
+    margin-left: -1px;
+}
+
+/* 탭 버튼 활성화 스타일 */
+.tab button.active {
+    background-color: #11334c;
+}
+
+/* 탭 컨텐츠 스타일 */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.subLabel {
+    width: 25vw;
 }

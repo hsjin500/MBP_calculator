@@ -1,44 +1,110 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/index.css">
     <link rel="apple-touch-icon" href="/img/쿠로미.png">
 </head>
+
 <body>
-    <div class="container">
-        <h1>MBP 계산기</h1>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'fluid')">수액</button>
+        <button class="tablinks" onclick="openTab(event, 'MBP')">MBP</button>
+        <button class="tablinks" onclick="openTab(event, 'DBP')">...</button>
+        <button class="tablinks" onclick="openTab(event, 'PR')">...</button>
+        <button class="tablinks" onclick="openTab(event, 'BT')">...</button>
+    </div>
 
-        <label>
-            <div>수축기 혈압 &nbsp;&nbsp;&rArr;</div>
-            <input type="tel" pattern="[0-9]*" novalidate id="sbp" placeholder="수축기 혈압">
-        </label>
-        <label>
-            <div>이완기 혈압 &nbsp;&nbsp;&rArr;</div>
-            <input type="tel" pattern="[0-9]*" novalidate id="dbp"  placeholder="이완기 혈압">
-        </label>
-        <label id="target_label">
-            <input type="tel" pattern="[0-9]*" novalidate id="lowTarget" placeholder="낮은 값">
-                <div>&nbsp;&#8804;&nbsp;&nbsp; 타겟 &nbsp;&nbsp;&lt;&nbsp;</div>
-            <input type="tel" pattern="[0-9]*" novalidate id="highTarget" placeholder="높은 값">
-        </label>
+    <div id="fluid" class="tabcontent">
+        <div class="container">
+            <h1>일반수액 계산기</h1>
 
-        <button onclick="calculateMBP()">계산하기</button>
-        <button onclick="clearHistory()">기록 초기화</button>
+            <label>
+                <div class="subLabel">수액 용량</div>
+                <div>&rArr;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="volume" placeholder="cc">
+                <div>cc</div>
+            </label>
+            <label>
+                <div class="subLabel">주입 시간</div>
+                <div>&rArr;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="duration" placeholder="시간">
+                <div>hr</div>
+            </label>
 
-        <div id="history">
-            <table id="historyTable">
-                <thead>
-                    <tr>
-                        <th>시간</th>
-                        <th>MBP 결과</th>
-                    </tr>
-                </thead>
-                <tbody id="historyBody"></tbody>
-            </table>
+            <button onclick="calculateFluid()">계산하기</button>
+            <button onclick="clearHistoryFluid()">기록 초기화</button>
+
+            <div id="history2">
+                <table id="historyTable2">
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>cc/hr</th>
+                            <th>gtt/min</th>
+                            <th>초당 물방울 수</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody2"></tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+    <div id="MBP" class="tabcontent">
+        <div class="container">
+            <h1>MBP 계산기</h1>
+
+            <label>
+                <div class="subLabel">수축기 혈압</div>
+                <div>&rArr;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="sbp" placeholder="수축기 혈압">
+                <div>mmHg</div>
+            </label>
+            <label>
+                <div class="subLabel">이완기 혈압</div>
+                <div>&rArr;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="dbp" placeholder="이완기 혈압">
+                <div>mmHg</div>
+            </label>
+            <label id="target_label">
+                <input type="tel" pattern="[0-9]*" novalidate id="lowTarget" placeholder="낮은 값">
+                <div>&nbsp;&#8804;&nbsp;&nbsp; 타겟 &nbsp;&nbsp;&lt;&nbsp;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="highTarget" placeholder="높은 값">
+            </label>
+
+            <button onclick="calculateMBP()">계산하기</button>
+            <button onclick="clearHistory()">기록 초기화</button>
+
+            <div id="history">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>시간</th>
+                            <th>MBP 결과</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="DBP" class="tabcontent">
+        <!-- DBP 계산 코드를 여기에 넣습니다 -->
+    </div>
+
+    <div id="PR" class="tabcontent">
+        <!-- PR 계산 코드를 여기에 넣습니다 -->
+    </div>
+
+    <div id="BT" class="tabcontent">
+        <!-- BT 계산 코드를 여기에 넣습니다 -->
+    </div>
+
     <script src="js/index.js"></script>
 </body>
+
 </html>
