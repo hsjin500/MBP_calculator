@@ -64,7 +64,7 @@ button:hover {
 }
 
 #history {
-    max-height: 400px;  /* 원하는 높이로 조정해주세요. */
+    max-height: 300px;  /* 원하는 높이로 조정해주세요. */
     overflow-y: auto;   /* 수직 방향 스크롤을 가능하게 합니다. */
     margin-top: 20px;
     /* padding: 10px; */
