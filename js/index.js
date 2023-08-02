@@ -120,6 +120,16 @@ function calculateFluid() {
     var historyBodyFluid = document.getElementById('historyBody2');
     var newRecord = document.createElement('tr');
 
+    // 테이블에 결과 추가
+    var newRecord = document.createElement('tr');
+    newRecord.className = 'latest-result';  // 새 결과에 클래스 추가
+
+    // 이전 결과의 강조를 제거
+    var latestResult = document.querySelector('.latest-result');
+    if (latestResult) {
+        latestResult.className = '';
+    }
+
     // 현재 시간 표시
     var currentTime = new Date();
     var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") <br>" 
