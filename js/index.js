@@ -132,7 +132,7 @@ function calculateFluid() {
 
     // 현재 시간 표시
     var currentTime = new Date();
-    var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") <br>" 
+    var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") " 
                 + String(currentTime.getHours()).padStart(2, '0') + "시:" + String(currentTime.getMinutes()).padStart(2, '0') + "분";
 
     var timeCell = document.createElement('td');
