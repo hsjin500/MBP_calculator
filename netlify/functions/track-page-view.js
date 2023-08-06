@@ -10,7 +10,7 @@ exports.handler = async function(event, context) {
     user: 'hsj',
     password: 'Ghdtjdwls~',
     server: 'views-count.database.windows.net', // Azure SQL 서버 주소
-    database: 'master',
+    database: 'views',
     options: {
       encrypt: true
     }

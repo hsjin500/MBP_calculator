@@ -9,7 +9,7 @@ exports.handler = async function(event, context) {
     user: 'hsj',
     password: 'Ghdtjdwls~',
     server: 'views-count.database.windows.net',
-    database: 'master',
+    database: 'views',
     options: {
       encrypt: true
     }
