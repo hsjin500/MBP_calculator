@@ -102,7 +102,12 @@ function openTab(evt, tabName) {
 
     // 선택한 탭을 보이게 하고 링크를 활성화합니다
     document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+    if (evt) {
+        evt.currentTarget.className += " active";
+    }
+
+    // 탭 활성화 마지막에 광고 로드
+    (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
 // 수액 계산 함수
