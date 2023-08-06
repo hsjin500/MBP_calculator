@@ -18,7 +18,7 @@ exports.handler = async function(event, context) {
   try {
     let pool = await sql.connect(config)
 
-    /* 제일 처음에만 필요 */
+    /* 제일 테이블 만들었을때만 처음에만 필요 */
     // let result0 = await pool.request()
     //     .input('pageId', sql.Int, pageId)
     //     .query('SELECT view_count FROM page_views WHERE page_id = @pageId')
