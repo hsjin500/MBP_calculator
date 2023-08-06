@@ -20,7 +20,7 @@ function calculateMBP() {
     // history에 저장
     var currentTime = new Date();
     var timeString = (currentTime.getMonth() + 1) + "월 " + currentTime.getDate() + "일 (" + getDayOfWeek(currentTime) + ") " 
-                   + String(currentTime.getHours()).padStart(2, '0') + "시:" + String(currentTime.getMinutes()).padStart(2, '0') + "분";
+                + String(currentTime.getHours()).padStart(2, '0') + "시:" + String(currentTime.getMinutes()).padStart(2, '0') + "분";
     var historyBody = document.getElementById('historyBody');
 
 
