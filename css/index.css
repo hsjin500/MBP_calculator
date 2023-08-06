@@ -190,8 +190,9 @@ table thead tr:first-child th {
     border-top: none;  /* 위쪽 테두리를 없앱니다. */
 }
 
-.views_div, #viewCount {
-    color: #aaa;
+.views_div {
     text-align: right;
-    font-size: 10px;
+    font-size: 10px;    /* 글자 크기를 10px로 설정합니다. */
+    color: #aaa;        /* 글자 색상을 #aaa로 설정합니다. */
 }
+  
