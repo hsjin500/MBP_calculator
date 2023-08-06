@@ -1,0 +1,13 @@
+{
+    "name": "netlify-functions",
+    "version": "1.0.0",
+    "description": "Netlify Functions for tracking page views",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "mssql": "^7.2.1",
+        "random-words": "^1.1.1"
+    }
+}

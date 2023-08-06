@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     padding: 10px;
+    padding-top: 0;
     background-color: #f9f9f9;
     text-align: center;
     background-image: url(../img/duck.png);
@@ -75,7 +76,7 @@ button:hover {
 
 /* 표 헤더와 셀 스타일 */
 #history th, #history td, #history2 th, #history2 td {
-    border: 1px solid #aaa;
+    /* border: 1px solid #aaa; */
     padding: 5px;
 }
 
@@ -158,4 +159,39 @@ button:hover {
 input {
     border-radius: 10px;
     border: none;
+}
+
+td, th {
+    border: 1px solid #aaa;  /* 셀의 테두리를 추가합니다. */
+}
+
+/* 테이블의 첫 번째 열의 셀들에 대한 스타일 */
+table td:first-child, table th:first-child {
+    border-left: none;  /* 왼쪽 테두리를 없앱니다. */
+}
+
+/* 테이블의 마지막 열의 셀들에 대한 스타일 */
+table td:last-child, table th:last-child {
+    border-right: none;  /* 오른쪽 테두리를 없앱니다. */
+}
+
+/* 테이블의 첫 번째 행의 셀들에 대한 스타일 */
+table tr:first-child td, table tr:first-child th {
+    border-top: none;  /* 위쪽 테두리를 없앱니다. */
+}
+
+/* 테이블의 마지막 행의 셀들에 대한 스타일 */
+table tr:last-child td, table tr:last-child th {
+    border-bottom: none;  /* 아래쪽 테두리를 없앱니다. */
+}
+
+/* 테이블의 첫 번째 thead 행의 셀들에 대한 스타일 */
+table thead tr:first-child th {
+    border-top: none;  /* 위쪽 테두리를 없앱니다. */
+}
+
+#viewCount, #viewCount span {
+    color: #aaa;
+    text-align: right;
+    font-size: 10px;
 }
