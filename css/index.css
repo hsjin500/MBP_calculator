@@ -190,7 +190,7 @@ table thead tr:first-child th {
     border-top: none;  /* 위쪽 테두리를 없앱니다. */
 }
 
-#viewCount, #viewCount span {
+.views_div, #viewCount {
     color: #aaa;
     text-align: right;
     font-size: 10px;
