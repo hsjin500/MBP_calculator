@@ -20,16 +20,44 @@ exports.handler = async function(event, context) {
     // Azure SQL DB 연결
     let pool = await sql.connect(config)
     
-    // page_views 테이블에서 해당 페이지 ID의 조회수를 1 증가시킨다.
-    let increasePageViews = await pool.request()
+    /* 페이지 조회수*/
+    let checkRecord = await pool.request()
       .input('pageId', sql.Int, pageId)
-      .query('UPDATE page_views SET view_count = view_count + 1 WHERE page_id = @pageId')
+      .query('SELECT * FROM page_views WHERE page_id = @pageId')
+
+    if (checkRecord.recordset.length > 0) {
+      // 레코드가 있으면 update
+      let increasePageViews = await pool.request()
+        .input('pageId', sql.Int, pageId)
+        .query('UPDATE page_views SET view_count = view_count + 1 WHERE page_id = @pageId')
+    } else {
+      // 레코드가 없으면 insert
+      let insertPageView = await pool.request()
+        .input('pageId', sql.Int, pageId)
+        .input('viewCount', sql.Int, 1)
+        .query('INSERT INTO page_views (page_id, view_count) VALUES (@pageId, @viewCount)')
+    }
     
-    // user_page_views 테이블에서 해당 사용자의 해당 페이지 조회수를 1 증가시킨다.
-    let increaseUserPageViews = await pool.request()
+    /* 유저별-페이지별 조회수 */
+    let checkUserRecord = await pool.request()
       .input('userNickname', sql.NVarChar, userNickname)
       .input('pageId', sql.Int, pageId)
-      .query('UPDATE user_page_views SET view_count = view_count + 1 WHERE user_nickname = @userNickname AND page_id = @pageId')
+      .query('SELECT * FROM user_page_views WHERE user_nickname = @userNickname AND page_id = @pageId')
+
+    if (checkUserRecord.recordset.length > 0) {
+      // 레코드가 있으면 update
+      let increaseUserPageViews = await pool.request()
+        .input('userNickname', sql.NVarChar, userNickname)
+        .input('pageId', sql.Int, pageId)
+        .query('UPDATE user_page_views SET view_count = view_count + 1 WHERE user_nickname = @userNickname AND page_id = @pageId')
+    } else {
+      // 레코드가 없으면 insert
+      let insertUserPageView = await pool.request()
+        .input('userNickname', sql.NVarChar, userNickname)
+        .input('pageId', sql.Int, pageId)
+        .input('viewCount', sql.Int, 1)
+        .query('INSERT INTO user_page_views (user_nickname, page_id, view_count) VALUES (@userNickname, @pageId, @viewCount)')
+    }
 
       return {
         statusCode: 200,
@@ -37,7 +65,7 @@ exports.handler = async function(event, context) {
           'Access-Control-Allow-Origin': 'https://jwo.netlify.app',  // 모든 도메인으로부터의 요청을 허용
           'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
         },
-        body: JSON.stringify({message: 'Page view counted successfully'})
+        body: JSON.stringify({message: 'Page view updated successfully'})
       }
   } catch (err) {
     console.error(err)

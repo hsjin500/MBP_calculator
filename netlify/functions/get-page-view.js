@@ -17,6 +17,19 @@ exports.handler = async function(event, context) {
 
   try {
     let pool = await sql.connect(config)
+
+    /* 제일 처음에만 필요 */
+    // let result0 = await pool.request()
+    //     .input('pageId', sql.Int, pageId)
+    //     .query('SELECT view_count FROM page_views WHERE page_id = @pageId')
+
+    // // 해당 페이지에 대한 레코드가 없다면 새 레코드를 추가
+    // if (!result0.recordset[0]) {
+    //     await pool.request()
+    //         .input('pageId', sql.Int, pageId)
+    //         .query('INSERT INTO page_views (page_id, view_count) VALUES (@pageId, 0)')
+    // }
+
     
     let result = await pool.request()
       .input('pageId', sql.Int, pageId)

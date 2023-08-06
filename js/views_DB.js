@@ -51,7 +51,7 @@ fetch(urlWithParameters, { method: 'GET' })
   
     // 조회수를 화면에 표시
     let viewCountElement = document.querySelector('#viewCount');
-    viewCountElement.textContent = `${data.view_Count}`;
+    viewCountElement.textContent = `${data.viewCount}`;
   })
   .catch((error) => {
     console.error('Error:', error);
