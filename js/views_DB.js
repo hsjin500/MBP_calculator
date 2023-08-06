@@ -29,12 +29,17 @@ var functionUrl = 'https://jwo.netlify.app/.netlify/functions/update-page-view';
 var urlWithParameters = `${functionUrl}?user_nickname=${userNickname}&page_id=${pageId}`;
 
 // 요청 보내기
-fetch(urlWithParameters, { method: 'POST' })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch((error) => {
+async function sendRequest() {
+  try {
+    let response = await fetch(urlWithParameters, { method: 'POST' })
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
     console.error('Error:', error);
-  });
+  }
+}
+
+sendRequest();
 
 
 //====================================================================================
@@ -45,20 +50,20 @@ functionUrl = 'https://jwo.netlify.app/.netlify/functions/get-page-view';
 urlWithParameters = `${functionUrl}?page_id=${pageId}`;
 
 // 요청을 보내고 응답을 처리함
-fetch(urlWithParameters, { method: 'GET' })
-  .then(response => response.json())
-  .then(data => {
+async function getPageView() {
+  try {
+    let response = await fetch(urlWithParameters, { method: 'GET' });
+    let data = await response.json();
     console.log(data); // 여기서 응답 객체를 출력합니다.
-  
+
     // 조회수를 화면에 표시
     let viewCountElement = document.querySelector('#viewCount');
     viewCountElement.textContent = `${data.viewCount}`;
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error('Error:', error);
-  });
+  }
+}
 
-
-
+getPageView();
 
 
