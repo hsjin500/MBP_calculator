@@ -1,13 +1,8 @@
-// Node.js 환경에서는 'random-words' 패키지를 사용하여 랜덤한 영어 단어를 생성할 수 있습니다.
-// 먼저 패키지를 설치합니다: npm install random-words
-const randomWords = require('random-words');
 
 // localStorage에서 'nickname' 키를 확인하고, 없다면 새 닉네임 생성
 if (!localStorage.getItem('nickname')) {
-  // 랜덤한 닉네임 생성 로직
   // 이 예시에서는 랜덤한 단어에 랜덤 숫자를 추가하여 닉네임을 생성합니다
-  let randomWord = randomWords();
-  let randomNickname = randomWord + Math.floor(Math.random() * 10000);
+  let randomNickname = "User" + Math.floor(Math.random() * 10000);
 
   // 'nickname' 키와 함께 랜덤 닉네임을 localStorage에 저장
   localStorage.setItem('nickname', randomNickname);
