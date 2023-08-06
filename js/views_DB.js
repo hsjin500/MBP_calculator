@@ -47,9 +47,11 @@ urlWithParameters = `${functionUrl}?page_id=${pageId}`;
 fetch(urlWithParameters, { method: 'GET' })
   .then(response => response.json())
   .then(data => {
+    console.log(data); // 여기서 응답 객체를 출력합니다.
+  
     // 조회수를 화면에 표시
     let viewCountElement = document.querySelector('#viewCount');
-    viewCountElement.textContent = `${data.viewCount}`;
+    viewCountElement.textContent = `${data.view_Count}`;
   })
   .catch((error) => {
     console.error('Error:', error);
