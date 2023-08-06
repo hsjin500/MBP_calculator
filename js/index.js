@@ -105,9 +105,6 @@ function openTab(evt, tabName) {
     if (evt) {
         evt.currentTarget.className += " active";
     }
-
-    // 탭 활성화 마지막에 광고 로드
-    (adsbygoogle = window.adsbygoogle || []).push({});
 }
 
 // 수액 계산 함수
