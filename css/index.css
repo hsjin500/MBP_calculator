@@ -196,3 +196,18 @@ table thead tr:first-child th {
     color: #aaa;        /* 글자 색상을 #aaa로 설정합니다. */
 }
   
+/* .tab 내부의 모든 버튼에 적용될 스타일 */
+.tab .tablinks {
+    border-top: none;
+    border-bottom: none;
+}
+
+/* .tab 내부의 첫 번째 버튼에 적용될 스타일 */
+.tab .tablinks:first-child {
+border-left: none;
+}
+
+/* .tab 내부의 마지막 버튼에 적용될 스타일 */
+.tab .tablinks:last-child {
+border-right: none;
+}
