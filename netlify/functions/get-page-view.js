@@ -1,4 +1,4 @@
-// track-page-view.js
+// get-page-view.js
 
 const sql = require('mssql')
 

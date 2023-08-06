@@ -21,7 +21,7 @@ let pageId = pageIdMetaTag ? parseInt(pageIdMetaTag.getAttribute('content'), 10)
 console.log(pageId);
 
 // 넷틀리파이 함수 URL
-let functionUrl = 'https://your-netlify-site.netlify.app/.netlify/functions/track-page-view';
+var functionUrl = 'https://your-netlify-site.netlify.app/.netlify/functions/track-page-view';
 
 //====================================================================================
 /* 쿼리 스트링으로 랜덤 닉네임과 페이지 ID 전달 */
@@ -37,6 +37,9 @@ fetch(urlWithParameters, { method: 'POST' })
 
 
 //====================================================================================
+
+functionUrl = 'https://your-netlify-site.netlify.app/.netlify/functions/get-page-view';
+
 // 쿼리 스트링으로 페이지 ID 전달
 urlWithParameters = `${functionUrl}?page_id=${pageId}`;
 
