@@ -24,12 +24,20 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',  // 모든 도메인으로부터의 요청을 허용
+        'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
+      },
       body: JSON.stringify({viewCount: result.recordset[0].view_count})
     }
   } catch (err) {
     console.error(err)
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',  // 모든 도메인으로부터의 요청을 허용
+        'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
+      },
       body: JSON.stringify({error: 'An error occurred'})
     }
   }

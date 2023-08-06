@@ -31,15 +31,23 @@ exports.handler = async function(event, context) {
       .input('pageId', sql.Int, pageId)
       .query('UPDATE user_page_views SET view_count = view_count + 1 WHERE user_nickname = @userNickname AND page_id = @pageId')
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({message: 'Page view counted successfully'})
-    }
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',  // 모든 도메인으로부터의 요청을 허용
+          'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
+        },
+        body: JSON.stringify({message: 'Page view counted successfully'})
+      }
   } catch (err) {
     console.error(err)
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',  // 모든 도메인으로부터의 요청을 허용
+        'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
+      },
       body: JSON.stringify({error: 'An error occurred'})
     }
-  }
+  } 
 }
