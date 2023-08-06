@@ -44,8 +44,9 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: {
-        'Access-Control-Allow-Origin': '*',  // 모든 도메인으로부터의 요청을 허용
-        'Access-Control-Allow-Headers': 'Content-Type'  // Content-Type 헤더를 허용
+        'Access-Control-Allow-Origin': '*', // 모든 출처로부터의 요청을 허용
+        'Access-Control-Allow-Headers': 'Content-Type', // Content-Type 헤더를 허용
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' // 허용되는 메서드를 지정
       },
       body: JSON.stringify({error: 'An error occurred'})
     }
