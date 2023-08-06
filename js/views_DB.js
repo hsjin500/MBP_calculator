@@ -21,7 +21,7 @@ let pageId = pageIdMetaTag ? parseInt(pageIdMetaTag.getAttribute('content'), 10)
 console.log(pageId);
 
 // 넷틀리파이 함수 URL
-var functionUrl = 'https://jwo.netlify.app/.netlify/functions/track-page-view';
+var functionUrl = 'https://jwo.netlify.app/.netlify/functions/update-page-view';
 
 //====================================================================================
 /* 쿼리 스트링으로 랜덤 닉네임과 페이지 ID 전달 */
