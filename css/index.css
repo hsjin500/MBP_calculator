@@ -159,3 +159,7 @@ input {
     border-radius: 10px;
     border: none;
 }
+
+#ads {
+    max-height: 200px;
+}
