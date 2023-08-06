@@ -10,6 +10,7 @@ if (!localStorage.getItem('nickname')) {
 
 // 'nickname' 키에서 랜덤 닉네임 가져오기
 let userNickname = localStorage.getItem('nickname');
+console.log('userNickname : ', userNickname);
 
 // 'pageId' 메타 태그를 가져옴
 let pageIdMetaTag = document.querySelector('meta[name="pageId"]');
@@ -18,9 +19,9 @@ let pageIdMetaTag = document.querySelector('meta[name="pageId"]');
 let pageId = pageIdMetaTag ? parseInt(pageIdMetaTag.getAttribute('content'), 10) : 0;
 
 // 페이지 ID 확인
-console.log(pageId);
+console.log('pageId : ',pageId);
 
-// 넷틀리파이 함수 URL
+// 넷틀리파이 함수 URL for DB 업데이트 및 삽입
 var functionUrl = 'https://jwo.netlify.app/.netlify/functions/update-page-view';
 
 //====================================================================================
@@ -37,7 +38,7 @@ fetch(urlWithParameters, { method: 'POST' })
 
 
 //====================================================================================
-
+// 넷틀리파이 함수 URL for 조회수 체크
 functionUrl = 'https://jwo.netlify.app/.netlify/functions/get-page-view';
 
 // 쿼리 스트링으로 페이지 ID 전달
