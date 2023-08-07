@@ -165,6 +165,7 @@ function calculateFluid() {
 
 document.addEventListener("DOMContentLoaded", function () {
     openTab(null, 'fluid');
+    tabButton(null, 'vs');
 });
 
 
@@ -230,3 +231,96 @@ window.onload = function () {
     }
 };
 
+// ==========================================
+
+function addBoxEvent(room, button) {
+    let boxCounter = Array.from(room.querySelectorAll('.box')).length;
+    button.addEventListener('click', () => {
+        boxCounter++;
+
+        const box = document.createElement('div');
+        box.classList.add('box');
+        box.id = `${room.id.split('room')[1]}-${boxCounter}`;
+
+        const boxNumberSpan = document.createElement('span');
+        boxNumberSpan.classList.add('box-number');
+        boxNumberSpan.textContent = boxCounter;
+
+        box.appendChild(boxNumberSpan);
+
+        // div 박스를 + 버튼 바로 전에 추가
+        room.insertBefore(box, button);
+    });
+}
+
+let roomCounter = 1;
+
+// 1호실의 박스 추가 버튼에 대한 이벤트 리스너 설정
+const initialRoom = document.getElementById('room1');
+const initialAddBoxButton = initialRoom.querySelector('.add-box-button');
+addBoxEvent(initialRoom, initialAddBoxButton);
+
+document.getElementById('add-room').addEventListener('click', () => {
+    roomCounter++;
+
+    // 새로운 room div를 생성
+    const room = document.createElement('div');
+    room.classList.add('room');
+    room.id = `room${roomCounter}`;
+
+    const input = document.createElement('input');
+    input.setAttribute('type', 'number');
+    input.setAttribute('min', '0');
+    input.setAttribute('max', '99');
+    input.classList.add('room-input');
+    input.value = roomCounter;
+
+    const span = document.createElement('span');
+    span.id = `number_span`;
+    span.textContent = '호실';
+
+    room.appendChild(input);
+    room.appendChild(span);
+
+    const addBoxButton = document.createElement('button');
+    addBoxButton.textContent = '+';
+    addBoxButton.classList.add('add-box-button');
+
+    const initialBox = document.createElement('div');
+    initialBox.classList.add('box');
+    initialBox.id = `${roomCounter}-1`;
+
+    const initialBoxNumberSpan = document.createElement('span');
+    initialBoxNumberSpan.classList.add('box-number');
+    initialBoxNumberSpan.textContent = '1';
+
+    initialBox.appendChild(initialBoxNumberSpan);
+
+    room.appendChild(initialBox);
+    room.appendChild(addBoxButton);
+
+    // 방을 rooms 바로 전에 추가
+    document.getElementById('rooms').insertBefore(room, document.getElementById('add-room'));
+
+    addBoxEvent(room, addBoxButton);  // 새로운 호실의 박스 추가 버튼에 대한 이벤트 리스너 설정
+});
+
+function tabButton(evt, tabName) {
+    // 모든 탭 컨텐츠를 숨깁니다
+    var tabcontent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // 모든 탭 링크를 비활성화합니다
+    var tablinks = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // 선택한 탭을 보이게 하고 링크를 활성화합니다
+    document.getElementById(tabName).style.display = "block";
+    if (evt) {
+        evt.currentTarget.className += " active";
+    }
+}

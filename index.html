@@ -16,7 +16,7 @@
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'fluid')">수액</button>
         <button class="tablinks" onclick="openTab(event, 'MBP')">MBP</button>
-        <button class="tablinks" onclick="openTab(event, 'DBP')">...</button>
+        <button class="tablinks" onclick="openTab(event, 'memo')">메모</button>
         <button class="tablinks" onclick="openTab(event, 'PR')">...</button>
         <button class="tablinks" onclick="openTab(event, 'BT')">...</button>
     </div>
@@ -96,8 +96,48 @@
         </div>
     </div>
 
-    <div id="DBP" class="tabcontent">
-        <!-- DBP 계산 코드를 여기에 넣습니다 -->
+    <div id="memo" class="tabcontent">
+        <div class="container">
+            <div class="header-container"> <!-- 컨테이너 추가 -->
+                <h1>환자 메모(미완)</h1>
+                <button id="delete-all">초기화</button>
+            </div>
+            <div id="rooms">
+                <div class="room" id="room1">
+                    <input class="room-input" type="number" min="0" max="99" value="1">
+                    <span id="number_span">호실</span>
+                    <div class="box" id="1-1">
+                        <span class="box-number">1</span>
+                    </div>
+                    <button class="add-box-button">+</button>
+                </div>
+                <button id="add-room">+</button>
+            </div>            
+            <div id="notes">
+                <div class="header-container"> <!-- 컨테이너 추가 -->
+                    <h2>메모장</h2>
+                    <button id="doctor">의사</button>
+                    <button id="other">기타</button>
+                </div>
+                <div id="tabs">
+                    <button class="tab-button" onclick="tabButton(event, 'vs')">V/S</button>
+                    <button class="tab-button" onclick="tabButton(event, 'drawing')">그림판</button>
+                    <button class="tab-button" onclick="tabButton(event, 'keypad')">키패드</button>
+                </div>
+                <div id="tabs-contents">
+                    <div id="vs" class="tab-content">
+                        <textarea id="vsText"></textarea>
+                    </div>
+                    <div id="drawing" class="tab-content">
+                        <canvas id="canvas" width="400" height="400"></canvas>
+                    </div>
+                    <div id="keypad" class="tab-content">
+                        <textarea id="text"></textarea>
+                    </div>
+                </div>
+                <button id="delete-note">이 환자에 대한 메모 삭제</button>
+            </div>
+        </div>
     </div>
 
     <div id="PR" class="tabcontent">

@@ -211,3 +211,165 @@ border-left: none;
 .tab .tablinks:last-child {
 border-right: none;
 }
+
+/* 필요한 스타일 지정 */
+.room {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.box {
+    width: 30px;
+    height: 30px;
+    border: 0.5px solid #aaa;
+    margin-right: 10px;
+    position: relative;
+    border-radius: 5px;
+    background-color: rgb(166, 187, 206);
+}
+.box::before {
+    content: attr(data-number);
+    position: absolute;
+    top: -10px;
+    left: 22px;
+}
+.box-input {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.box-number {
+    position: absolute;
+    top: -5px;   /* 윗변 중앙 위치 */
+    left: 50%;   /* 가로 중앙 정렬 */
+    transform: translateX(-50%); /* 왼쪽에서 50% 이동하여 정확히 중앙에 위치 */
+    
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+
+    width: 10px;   /* 원의 크기 */
+    height: 10px;  /* 원의 크기 */
+    border-radius: 50%;  /* 원 모양 만들기 */
+    background-color: rgb(255, 255, 255);  /* 원의 배경색 */
+    /* border: 1px solid black; */
+    font-size: 10px;
+}
+
+.room-input{
+    width: 35px;
+    margin: 5px;
+    padding: 9px;
+}
+
+.add-box-button {
+    width: 20px;
+    height: 20px;
+    display: flex;         /* Flexbox를 사용합니다. */
+    align-items: center;   /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    border-radius: 5px;
+}
+
+#number_span {
+    margin-right: 16px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center; /* h1을 중앙에 위치시키기 */
+    align-items: center; /* 세로 중앙 정렬 */
+    position: relative; /* 컨테이너에 상대적인 위치를 지정하기 위한 설정 */
+}
+
+#delete-all {
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    width: 60px;
+    margin: 5px;
+}
+
+#add-room {
+    width: 20px;
+    height: 20px;
+    display: flex;         /* Flexbox를 사용합니다. */
+    align-items: center;   /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    border-radius: 5px;
+    margin: 0px 0px 0px 12.5px ;
+}
+
+#notes {
+    margin: 0 auto; /* 중앙 정렬 */
+    position: relative; /* 의사 및 기타 버튼의 절대 위치 지정을 위한 기준 */
+    padding: 10px; /* 내부 패딩 */
+    padding-top: 0;
+    margin-top: 15px;
+    border-top: 1px dashed #ffffff;
+}
+
+h2 {
+    color: white;
+    display: inline-block; /* h2 옆에 버튼을 놓기 위해 인라인-블록으로 설정 */
+    vertical-align: middle; /* 수직 중앙 정렬 */
+}
+
+#doctor {
+    border-radius: 5px;
+    width: 47px;
+    position: absolute;
+    right: 50px;
+}
+
+#other {
+    border-radius: 5px;
+    width: 47px;
+    position: absolute;
+    right: 0;
+}
+
+#tabs {
+    display: flex; /* 탭 버튼을 가로로 배열 */
+    border-radius: 10px;
+}
+
+#tabs .tab-button:first-of-type {
+    border-top-left-radius: 10px;
+}
+
+#tabs .tab-button:last-of-type {
+    border-top-right-radius: 10px;
+}
+
+#canvas {
+    display: block; /* 캔버스 중앙 정렬 */
+    margin: 0 auto;
+}
+
+textarea {
+    width: 100%; /* 전체 폭 사용 */
+    height: 200px; /* 텍스트 영역 높이 설정 */
+}
+
+#delete-note {
+    display: block; /* 버튼 중앙 정렬 */
+    margin: 20px auto 0;
+}
+
+.tab-button {
+    width: 60px;
+    margin: 0;
+    border-right: 1px solid #595b63; /* 오른쪽 경계 설정 */
+}
+
+/* 마지막 버튼의 오른쪽 경계 제거 */
+.tab-button:last-of-type {
+    border-right: none;
+}
+
+
+/* 기본적으로 V/S 탭의 내용을 보여줍니다. */
+#vs {
+    display: block;
+}
