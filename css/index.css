@@ -64,6 +64,7 @@ button:hover {
     max-height: 40vh; /* 원하는 높이로 조정해주세요. */
     overflow-y: auto; /* 수직 방향 스크롤을 가능하게 합니다. */
     margin-top: 20px;
+    margin-bottom: 60px;
     height: 100%;
     border-radius: 10px;
 }
