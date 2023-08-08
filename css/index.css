@@ -373,3 +373,12 @@ textarea {
 #vs {
     display: block;
 }
+
+.ads-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(4px);
+    margin: auto;
+}
