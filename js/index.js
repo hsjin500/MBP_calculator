@@ -162,10 +162,11 @@ function calculateFluid() {
 }
 
 
-
+// 웹사이트 시작할때 불러오는 함수
 document.addEventListener("DOMContentLoaded", function () {
     openTab(null, 'fluid');
     tabButton(null, 'vs');
+    loadRoomValues(); // 호실 설정
 });
 
 
@@ -275,6 +276,13 @@ document.getElementById('add-room').addEventListener('click', () => {
     input.classList.add('room-input');
     input.value = roomCounter;
 
+    // input 이벤트 리스너 등록
+    input.addEventListener('input', function(e) {
+        const parentID = e.target.parentNode.id; // 부모의 아이디 가져오기
+        const value = e.target.value; // 입력된 값 가져오기
+        localStorage.setItem(parentID, value); // localStorage에 저장
+    });
+
     const span = document.createElement('span');
     span.id = `number_span`;
     span.textContent = '호실';
@@ -324,3 +332,51 @@ function tabButton(evt, tabName) {
         evt.currentTarget.className += " active";
     }
 }
+
+document.querySelectorAll('.room-input').forEach(function(input) {
+    input.addEventListener('input', function(e) {
+      const parentID = e.target.parentNode.id; // 부모의 아이디 가져오기
+      const value = e.target.value; // 입력된 값 가져오기
+      localStorage.setItem(parentID, value); // localStorage에 저장
+    });
+});
+
+function loadRoomValues() {
+    // 찾은 room의 수
+    let roomCount = 0;
+  
+    // localStorage에서 roomX로 시작하는 key에 대한 값을 찾아서 적용
+    for (let i = 1; i <= localStorage.length; i++) {
+      const roomID = `room${i}`;
+      const value = localStorage.getItem(roomID);
+  
+      if (value !== null) {
+        roomCount++;
+        continue; // 일단 room의 개수만 파악
+      } else {
+        break; // roomX 키가 없으면 loop 종료
+      }
+    }
+  
+    // #add-room 버튼 찾기
+    const addRoomButton = document.getElementById('add-room');
+  
+    // 이전에 저장된 방의 수에 맞게 버튼 클릭
+    for (let i = 1; i < roomCount; i++) {
+      addRoomButton.click(); // 버튼 클릭
+    }
+  
+    // 값 적용
+    for (let i = 1; i <= roomCount; i++) {
+      const roomID = `room${i}`;
+      const value = localStorage.getItem(roomID);
+      const input = document.querySelector(`#${roomID} input`);
+      if (input) {
+        input.value = value; // 값을 input에 적용
+      }
+    }
+  }
+  
+
+  
+  
