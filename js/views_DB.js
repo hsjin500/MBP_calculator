@@ -39,7 +39,7 @@ async function sendRequest() {
   }
 }
 
-sendRequest();
+// sendRequest();
 
 
 //====================================================================================
@@ -64,6 +64,6 @@ async function getPageView() {
   }
 }
 
-getPageView();
+// getPageView();
 
 
