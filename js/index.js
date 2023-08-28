@@ -1,3 +1,4 @@
+let coloredBox = null;  // 현재 선택된 박스를 추적할 변수
 
 // 요일을 반환하는 함수
 function getDayOfWeek(date) {
@@ -237,15 +238,60 @@ window.onload = function () {
 };
 
 // ==========================================
+// boxList 초기화
+let boxList = JSON.parse(localStorage.getItem('boxList')) || [];
+
+// 초기에 박스 생성
+function initializeBoxes() {
+    // boxList에 저장된 각각의 박스 아이디를 이용해 박스 생성
+    for (const boxId of boxList) {
+        const [roomIdPart, boxNumber] = boxId.split('-');
+        const room = document.getElementById(`room${roomIdPart}`);
+        const addButton = room.querySelector('.add-box-button');  // + 버튼을 찾아야 함, 클래스는 예시입니다.
+
+        // 이전 코드의 로직을 활용하여 박스 생성
+        const box = document.createElement('div');
+        box.classList.add('box');
+        box.id = boxId;
+
+        box.addEventListener('click', () => {
+            // 이전에 선택된 박스가 있으면 강조 표시 제거
+            if (coloredBox) {
+                coloredBox.classList.remove('box-selected');
+            }
+          
+            // 새로운 박스를 강조 표시
+            box.classList.add('box-selected');
+          
+            // 선택된 박스 업데이트
+            coloredBox = box;
+          
+            bringMemo(box.id);
+        });
+
+        const boxNumberSpan = document.createElement('span');
+        boxNumberSpan.classList.add('box-number');
+        boxNumberSpan.textContent = boxNumber;
+
+        box.appendChild(boxNumberSpan);
+
+        // div 박스를 + 버튼 바로 전에 추가
+        room.insertBefore(box, addButton);
+    }
+}
+
+// 페이지가 로드되면 initializeBoxes 함수를 호출
+window.addEventListener('load', initializeBoxes);
 
 function addBoxEvent(room, button) {
-    let boxCounter = Array.from(room.querySelectorAll('.box')).length;
-
-    // boxList 초기화
-    let boxList = JSON.parse(localStorage.getItem('boxList')) || [];
-
+    
     button.addEventListener('click', () => {
-        boxCounter++;
+        // room 내에서 가장 높은 box-number 값을 찾기
+        const boxNumbers = Array.from(room.querySelectorAll('.box-number')).map(span => parseInt(span.textContent, 10));
+        let highestBoxNumber = Math.max(0, ...boxNumbers);
+        
+        // highestBoxNumber보다 1 큰 값으로 boxCounter 설정
+        let boxCounter = highestBoxNumber + 1;
 
         const box = document.createElement('div');
         box.classList.add('box');
@@ -258,6 +304,17 @@ function addBoxEvent(room, button) {
 
         // 박스에 이벤트 리스너 추가
         box.addEventListener('click', () => {
+            // 이전에 선택된 박스가 있으면 강조 표시 제거
+            if (coloredBox) {
+                coloredBox.classList.remove('box-selected');
+            }
+          
+            // 새로운 박스를 강조 표시
+            box.classList.add('box-selected');
+          
+            // 선택된 박스 업데이트
+            coloredBox = box;
+          
             bringMemo(box.id);
         });
 
@@ -269,8 +326,12 @@ function addBoxEvent(room, button) {
 
         // div 박스를 + 버튼 바로 전에 추가
         room.insertBefore(box, button);
+        
+        // 다음에 추가될 box의 번호를 준비
+        boxCounter++;
     });
 }
+
 
 
 let roomCounter = 1;
@@ -281,7 +342,18 @@ const initialAddBoxButton = initialRoom.querySelector('.add-box-button');
 addBoxEvent(initialRoom, initialAddBoxButton);
 const initialBox = document.getElementById('1-1');
 initialBox.addEventListener('click', () => {
-    bringMemo(initialBox.id);
+    // 이전에 선택된 박스가 있으면 강조 표시 제거
+    if (coloredBox) {
+        coloredBox.classList.remove('box-selected');
+    }
+  
+    // 새로운 박스를 강조 표시
+    initialBox.classList.add('box-selected');
+  
+    // 선택된 박스 업데이트
+    coloredBox = initialBox;
+  
+    bringMemo('1-1');
 });
     
 function updateLocalStorageFromInput(e) {
@@ -328,7 +400,7 @@ document.getElementById('add-room').addEventListener('click', () => {
 
     initialBox.appendChild(initialBoxNumberSpan);
 
-    room.appendChild(initialBox);
+    // room.appendChild(initialBox);
     room.appendChild(addBoxButton);
 
     // 방을 rooms 바로 전에 추가
@@ -338,6 +410,7 @@ document.getElementById('add-room').addEventListener('click', () => {
     // 강제로 input 이벤트 리스너 로직 실행
     updateLocalStorageFromInput({ target: input });
 });
+
 
 function tabButton(evt, tabName) {
     // 모든 탭 컨텐츠를 숨깁니다
@@ -368,46 +441,38 @@ document.querySelectorAll('.room-input').forEach(function(input) {
 });
 
 function loadRoomValues() {
-    // 찾은 room의 수
-    let roomCount = 0;
-  
-    // localStorage에서 roomX로 시작하는 key에 대한 값을 찾아서 적용
-    for (let i = 1; i <= localStorage.length; i++) {
-      const roomID = `room${i}`;
-      const value = localStorage.getItem(roomID);
-  
-      if (value !== null) {
-        roomCount++;
-        continue; // 일단 room의 개수만 파악
-      } else {
-        break; // roomX 키가 없으면 loop 종료
-      }
-    }
-  
     // #add-room 버튼 찾기
     const addRoomButton = document.getElementById('add-room');
-  
-    // 이전에 저장된 방의 수에 맞게 버튼 클릭
-    for (let i = 1; i < roomCount; i++) {
-      addRoomButton.click(); // 버튼 클릭
+
+    // room의 수와 값들을 한 번의 반복문에서 처리
+    for (let i = 1; ; i++) {
+        const roomID = `room${i}`;
+        const value = localStorage.getItem(roomID);
+        console.log(`호실 ${i} : `, value)
+        // roomX 키가 없으면 loop 종료
+        if (value === null && roomID != 'room1') {
+            break;
+        }
+
+        // 이전에 저장된 방의 수에 맞게 버튼 클릭
+        if (i > 1) {
+            addRoomButton.click(); // 버튼 클릭
+        }
+
+        // 값을 input에 적용
+        const input = document.querySelector(`#${roomID} input`);
+        if (input) {
+            input.value = value;
+        }
     }
-  
-    // 값 적용
-    for (let i = 1; i <= roomCount; i++) {
-      const roomID = `room${i}`;
-      const value = localStorage.getItem(roomID);
-      const input = document.querySelector(`#${roomID} input`);
-      if (input) {
-        input.value = value; // 값을 input에 적용
-      }
-    }
-  }
+}
+
 
 var selectedBox = "1-1";
 
 function bringMemo(id) {
     selectedBox = id;
-    console.log('id : ', id);
+    console.log('해당 box의 id : ', id);
     // localStorage에서 키를 사용해 데이터를 가져온다.
     const key1 = id + "'s vsmemo";
     const memo1 = localStorage.getItem(key1);
@@ -471,6 +536,28 @@ document.getElementById('delete-all').addEventListener('click', () => {
             localStorage.removeItem(key);
         }
     }
+
+    localStorage.removeItem('boxList');
 });
 
-// 다음 해야하는 작업은 처음에 열릴때, 박스리스트에서 이전 기록을 가져와서 박스를 생성해 놓는 것.
+document.getElementById('delete-note').addEventListener('click', () => {
+    if (coloredBox) {
+        const targetId = coloredBox.id;  // 예를 들어, "1-1"
+
+        // localStorage에서 coloredBox의 id를 포함하는 모든 키를 찾아 삭제
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+
+            // key가 targetId를 포함하면 해당 항목을 삭제
+            if (key && key.includes(targetId)) {
+                localStorage.removeItem(key);
+            }
+        }
+        // DOM에서 해당 박스 삭제
+        // coloredBox.remove();
+        // coloredBox = null;  // coloredBox 초기화
+    } else {
+        alert('삭제할 박스를 선택해 주세요.');
+    }
+});
+
