@@ -211,37 +211,55 @@ window.onload = function () {
 
     for (var i = 0; i < historyDataFluid.length; i++) {
         var newRecordFluid = document.createElement('tr');
-
+    
         var timeCellFluid = document.createElement('td');
         timeCellFluid.textContent = historyDataFluid[i].time; // 시간 데이터
         newRecordFluid.appendChild(timeCellFluid);
-
+    
         var ccPerHourCell = document.createElement('td');
-        ccPerHourCell.textContent = historyDataFluid[i].ccPerHour.toFixed(2) + " cc/hr";
+        var ccPerHour = historyDataFluid[i].ccPerHour;
+        ccPerHourCell.textContent = (ccPerHour ? ccPerHour.toFixed(2) : "N/A") + " cc/hr";
         newRecordFluid.appendChild(ccPerHourCell);
-
+    
         var gttPerMinCell = document.createElement('td');
-        gttPerMinCell.textContent = historyDataFluid[i].gttPerMin.toFixed(2) + " gtt/min";
+        var gttPerMin = historyDataFluid[i].gttPerMin;
+        gttPerMinCell.textContent = (gttPerMin ? gttPerMin.toFixed(2) : "N/A") + " gtt/min";
         newRecordFluid.appendChild(gttPerMinCell);
-
+    
         var timePerDropCell = document.createElement('td');
-        timePerDropCell.textContent = historyDataFluid[i].timePerDrop.toFixed(2) + " drops/sec";
+        var timePerDrop = historyDataFluid[i].timePerDrop;
+        timePerDropCell.textContent = (timePerDrop ? timePerDrop.toFixed(2) : "N/A") + " drops/sec";
         newRecordFluid.appendChild(timePerDropCell);
-
+    
         historyBodyFluid.appendChild(newRecordFluid);
     }
+    
 };
 
 // ==========================================
 
 function addBoxEvent(room, button) {
     let boxCounter = Array.from(room.querySelectorAll('.box')).length;
+
+    // boxList 초기화
+    let boxList = JSON.parse(localStorage.getItem('boxList')) || [];
+
     button.addEventListener('click', () => {
         boxCounter++;
 
         const box = document.createElement('div');
         box.classList.add('box');
-        box.id = `${room.id.split('room')[1]}-${boxCounter}`;
+        const newBoxId = `${room.id.split('room')[1]}-${boxCounter}`;
+        box.id = newBoxId;
+
+        // boxList에 박스의 아이디를 추가하고 localStorage에 다시 저장
+        boxList.push(newBoxId);
+        localStorage.setItem('boxList', JSON.stringify(boxList));
+
+        // 박스에 이벤트 리스너 추가
+        box.addEventListener('click', () => {
+            bringMemo(box.id);
+        });
 
         const boxNumberSpan = document.createElement('span');
         boxNumberSpan.classList.add('box-number');
@@ -254,12 +272,23 @@ function addBoxEvent(room, button) {
     });
 }
 
+
 let roomCounter = 1;
 
 // 1호실의 박스 추가 버튼에 대한 이벤트 리스너 설정
 const initialRoom = document.getElementById('room1');
 const initialAddBoxButton = initialRoom.querySelector('.add-box-button');
 addBoxEvent(initialRoom, initialAddBoxButton);
+const initialBox = document.getElementById('1-1');
+initialBox.addEventListener('click', () => {
+    bringMemo(initialBox.id);
+});
+    
+function updateLocalStorageFromInput(e) {
+    const parentID = e.target.parentNode.id; // 부모의 아이디 가져오기
+    const value = e.target.value; // 입력된 값 가져오기
+    localStorage.setItem(parentID, value); // localStorage에 저장
+}
 
 document.getElementById('add-room').addEventListener('click', () => {
     roomCounter++;
@@ -276,12 +305,7 @@ document.getElementById('add-room').addEventListener('click', () => {
     input.classList.add('room-input');
     input.value = roomCounter;
 
-    // input 이벤트 리스너 등록
-    input.addEventListener('input', function(e) {
-        const parentID = e.target.parentNode.id; // 부모의 아이디 가져오기
-        const value = e.target.value; // 입력된 값 가져오기
-        localStorage.setItem(parentID, value); // localStorage에 저장
-    });
+    input.addEventListener('input', updateLocalStorageFromInput);
 
     const span = document.createElement('span');
     span.id = `number_span`;
@@ -311,6 +335,8 @@ document.getElementById('add-room').addEventListener('click', () => {
     document.getElementById('rooms').insertBefore(room, document.getElementById('add-room'));
 
     addBoxEvent(room, addBoxButton);  // 새로운 호실의 박스 추가 버튼에 대한 이벤트 리스너 설정
+    // 강제로 input 이벤트 리스너 로직 실행
+    updateLocalStorageFromInput({ target: input });
 });
 
 function tabButton(evt, tabName) {
@@ -376,7 +402,75 @@ function loadRoomValues() {
       }
     }
   }
-  
 
+var selectedBox = "1-1";
+
+function bringMemo(id) {
+    selectedBox = id;
+    console.log('id : ', id);
+    // localStorage에서 키를 사용해 데이터를 가져온다.
+    const key1 = id + "'s vsmemo";
+    const memo1 = localStorage.getItem(key1);
+
+    const key2 = id + "'s textmemo";
+    const memo2 = localStorage.getItem(key2);
+
+    // id가 vstext인 textarea에 memo1을 설정
+    const vstextArea = document.getElementById('vsText');
+    if (memo1 !== null) {
+        vstextArea.value = memo1;
+    } else {
+        // 해당 id로 저장된 메모가 없을 경우
+        vstextArea.value = ''; // textarea를 빈 문자열로 설정
+    }
+
+    // id가 text인 textarea에 memo2를 설정
+    const textArea = document.getElementById('text');
+    if (memo2 !== null) {
+        textArea.value = memo2;
+    } else {
+        // 해당 id로 저장된 메모가 없을 경우
+        textArea.value = ''; // textarea를 빈 문자열로 설정
+    }
+}
+
+
+bringMemo('1-1');
+
+// id가 save-note인 버튼에 이벤트 리스너를 추가
+document.getElementById('save-note').addEventListener('click', function() {
+    // id가 vsText인 textarea의 값을 가져옴
+    const textAreaContent1 = document.getElementById('vsText').value;
+    const textAreaContent2 = document.getElementById('text').value;
+    
+    // localStorage에 저장
+    const key1 = selectedBox + "'s vsmemo";
+    localStorage.setItem(key1, textAreaContent1);
+    const key2 = selectedBox + "'s textmemo";
+    localStorage.setItem(key2, textAreaContent2);
+});
+
+
+// delete-all 아이디를 가진 버튼에 이벤트 리스너 추가
+document.getElementById('delete-all').addEventListener('click', () => {
+    // localStorage의 모든 키를 가져온다.
+    const keys = Object.keys(localStorage);
   
-  
+    // 각 키에 대해 확인하고 roomX로 시작하거나 memo가 포함된 키면 삭제한다.
+    for (const key of keys) {
+        if (key.startsWith('room')) {
+            // X 부분이 숫자인지 확인한다.
+            const roomNumber = key.split('room')[1].split("'s memo")[0];  // room과 's memo' 사이의 문자열을 가져옴
+            if (!isNaN(roomNumber)) {  // 숫자이면
+                localStorage.removeItem(key);
+            }
+        }
+
+        // memo가 포함된 키라면 삭제한다.
+        if (key.includes('memo')) {
+            localStorage.removeItem(key);
+        }
+    }
+});
+
+// 다음 해야하는 작업은 처음에 열릴때, 박스리스트에서 이전 기록을 가져와서 박스를 생성해 놓는 것.
