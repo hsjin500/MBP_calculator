@@ -43,6 +43,22 @@ label div {
     padding: 10px;
 }
 
+.subLabel {
+    width: 150px;
+}
+
+#volume {
+    width: 293px;
+}
+
+#duration_hr, #duration_min{
+    width: 100px;
+}
+
+.text {
+    padding: 0 30px 0px 10px;
+}
+
 #target_label {
     padding-right: 0;
     padding-left: 0;
@@ -149,9 +165,7 @@ button:hover {
     border-top: none;
 }
 
-.subLabel {
-    width: 25vw;
-}
+
 
 .clickable_Button {
     border-radius: 10px;
@@ -388,4 +402,5 @@ textarea {
 .box-selected {
     background-color: yellow ;  /* 원하는 색상으로 설정 */
   }
+
   

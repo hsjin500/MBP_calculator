@@ -112,10 +112,19 @@ function openTab(evt, tabName) {
 function calculateFluid() {
     // 입력값 가져오기
     var volume = document.getElementById('volume').value;  // 수액 용량 입력값 가져오기
-    var duration = document.getElementById('duration').value;  // 주입 시간 입력값 가져오기
+    var duration_hr = document.getElementById('duration_hr').value;  // 주입 시간 입력값 가져오기
+    var duration_min = document.getElementById('duration_min').value;  // 주입 시간 입력값 가져오기
+    
+    // 값이 없으면 0을 대입
+    if (!duration_min) {
+        duration_min = 0;
+    }
+    
+    // 시간과 분을 합쳐 총 시간을 분으로 환산
+    var total_duration_min = (parseInt(duration_hr) * 60) + parseInt(duration_min);
 
     // 계산
-    var ccPerHour = volume / duration;  // 시간당 cc 계산
+    var ccPerHour = volume / (total_duration_min / 60);  // 시간당 cc 계산
     var gttPerMin = ccPerHour / 3;  // 분당 물방울 수 계산
     var timePerDrop = 60 / gttPerMin;  // 한방울 떨어지는데 걸리는 시간(초) 계산
 

@@ -26,15 +26,17 @@
 
             <label>
                 <div class="subLabel">수액 용량</div>
-                <div>&rArr;</div>
+                <div class="text">&rArr;</div>
                 <input type="tel" pattern="[0-9]*" novalidate id="volume" placeholder="cc">
-                <div>cc</div>
+                <div class="text">cc</div>
             </label>
             <label>
                 <div class="subLabel">주입 시간</div>
-                <div>&rArr;</div>
-                <input type="tel" pattern="[0-9]*" novalidate id="duration" placeholder="시간">
-                <div>hr</div>
+                <div class="text">&rArr;</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="duration_hr" placeholder="시간">
+                <div class="text">hr</div>
+                <input type="tel" pattern="[0-9]*" novalidate id="duration_min" placeholder="0분">
+                <div class="text">mins</div>
             </label>
 
             <button class="clickable_Button" onclick="calculateFluid()">계산하기</button>
