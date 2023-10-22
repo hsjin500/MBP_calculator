@@ -47,6 +47,11 @@ label div {
     width: 150px;
 }
 
+.wrap1 {
+    width: 90%;
+    justify-content: end;
+}
+
 #volume {
     width: 100px;
 }
