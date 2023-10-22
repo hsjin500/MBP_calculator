@@ -116,6 +116,10 @@ function calculateFluid() {
     var duration_min = document.getElementById('duration_min').value;  // 주입 시간 입력값 가져오기
     
     // 값이 없으면 0을 대입
+    if (!duration_hr) {
+        duration_hr = 0;
+    }
+    // 값이 없으면 0을 대입
     if (!duration_min) {
         duration_min = 0;
     }
