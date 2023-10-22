@@ -245,7 +245,7 @@ window.onload = function () {
     
         var timePerDropCell = document.createElement('td');
         var timePerDrop = historyDataFluid[i].timePerDrop;
-        timePerDropCell.textContent = (timePerDrop ? timePerDrop.toFixed(2) : "N/A");
+        timePerDropCell.textContent = (timePerDrop ? timePerDrop.toFixed(2) : "N/A") + " drops/sec";
         newRecordFluid.appendChild(timePerDropCell);
     
         historyBodyFluid.appendChild(newRecordFluid);
