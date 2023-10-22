@@ -152,15 +152,15 @@ function calculateFluid() {
     newRecord.appendChild(timeCell);
 
     var ccPerHourCell = document.createElement('td');
-    ccPerHourCell.textContent = ccPerHour.toFixed(2) + " cc/hr";
+    ccPerHourCell.textContent = ccPerHour.toFixed(2);
     newRecord.appendChild(ccPerHourCell);
 
     var gttPerMinCell = document.createElement('td');
-    gttPerMinCell.textContent = gttPerMin.toFixed(2) + " gtt";
+    gttPerMinCell.textContent = gttPerMin.toFixed(2);
     newRecord.appendChild(gttPerMinCell);
 
     var timePerDropCell = document.createElement('td');
-    timePerDropCell.textContent = timePerDrop.toFixed(2) + " 초/방울";
+    timePerDropCell.textContent = timePerDrop.toFixed(2) + " drops/sec";
     newRecord.appendChild(timePerDropCell);
 
     historyBodyFluid.insertBefore(newRecord, historyBodyFluid.firstChild);
