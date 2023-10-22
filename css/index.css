@@ -34,7 +34,7 @@ input {
 
 label {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: #fff;
 }
@@ -48,15 +48,11 @@ label div {
 }
 
 #volume {
-    width: 293px;
-}
-
-#duration_hr, #duration_min{
     width: 100px;
 }
 
-.text {
-    padding: 0 30px 0px 10px;
+#duration_hr, #duration_min{
+    width: 50px;
 }
 
 #target_label {

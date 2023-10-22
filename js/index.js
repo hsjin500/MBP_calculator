@@ -119,7 +119,7 @@ function calculateFluid() {
     if (!duration_min) {
         duration_min = 0;
     }
-    
+
     // 시간과 분을 합쳐 총 시간을 분으로 환산
     var total_duration_min = (parseInt(duration_hr) * 60) + parseInt(duration_min);
 
@@ -156,14 +156,14 @@ function calculateFluid() {
     newRecord.appendChild(ccPerHourCell);
 
     var gttPerMinCell = document.createElement('td');
-    gttPerMinCell.textContent = gttPerMin.toFixed(2) + " gtt/min";
+    gttPerMinCell.textContent = gttPerMin.toFixed(2) + " gtt";
     newRecord.appendChild(gttPerMinCell);
 
     var timePerDropCell = document.createElement('td');
     timePerDropCell.textContent = timePerDrop.toFixed(2) + " 초/방울";
     newRecord.appendChild(timePerDropCell);
 
-    historyBodyFluid.appendChild(newRecord);
+    historyBodyFluid.insertBefore(newRecord, historyBodyFluid.firstChild);
 
     // 기록을 localStorage에 저장
     var historyDataFluid = JSON.parse(localStorage.getItem('historyDataFluid')) || [];
@@ -192,7 +192,8 @@ window.onload = function () {
     var historyBody = document.getElementById('historyBody');
     var targetRange = getTargetRange();  // 타겟 범위 불러오기
 
-    for (var i = 0; i < historyData.length; i++) {
+    // 배열을 정방향으로 반복
+    for (var i = historyData.length - 1; i >= 0; i--) {
         var newRecord = document.createElement('tr');
 
         var timeCell = document.createElement('td');
@@ -212,14 +213,20 @@ window.onload = function () {
 
         newRecord.appendChild(resultCell);
 
-        historyBody.appendChild(newRecord);
+        // 새로운 기록을 테이블의 맨 위에 추가
+        if (historyBody.firstChild) {
+            historyBody.insertBefore(newRecord, historyBody.firstChild);
+        } else {
+            historyBody.appendChild(newRecord);
+        }
     }
+
     
     // 수액 계산 기록 불러오기
     var historyDataFluid = JSON.parse(localStorage.getItem('historyDataFluid')) || [];
     var historyBodyFluid = document.getElementById('historyBody2');
 
-    for (var i = 0; i < historyDataFluid.length; i++) {
+    for (var i = historyDataFluid.length - 1; i >= 0; i--) {
         var newRecordFluid = document.createElement('tr');
     
         var timeCellFluid = document.createElement('td');
