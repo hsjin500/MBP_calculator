@@ -235,17 +235,17 @@ window.onload = function () {
     
         var ccPerHourCell = document.createElement('td');
         var ccPerHour = historyDataFluid[i].ccPerHour;
-        ccPerHourCell.textContent = (ccPerHour ? ccPerHour.toFixed(2) : "N/A") + " cc/hr";
+        ccPerHourCell.textContent = (ccPerHour ? ccPerHour.toFixed(2) : "N/A") ;
         newRecordFluid.appendChild(ccPerHourCell);
     
         var gttPerMinCell = document.createElement('td');
         var gttPerMin = historyDataFluid[i].gttPerMin;
-        gttPerMinCell.textContent = (gttPerMin ? gttPerMin.toFixed(2) : "N/A") + " gtt/min";
+        gttPerMinCell.textContent = (gttPerMin ? gttPerMin.toFixed(2) : "N/A");
         newRecordFluid.appendChild(gttPerMinCell);
     
         var timePerDropCell = document.createElement('td');
         var timePerDrop = historyDataFluid[i].timePerDrop;
-        timePerDropCell.textContent = (timePerDrop ? timePerDrop.toFixed(2) : "N/A") + " drops/sec";
+        timePerDropCell.textContent = (timePerDrop ? timePerDrop.toFixed(2) : "N/A");
         newRecordFluid.appendChild(timePerDropCell);
     
         historyBodyFluid.appendChild(newRecordFluid);
